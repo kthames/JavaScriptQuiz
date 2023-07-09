@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Script Quiz</title>
+    <link rel="stylesheet" type="text/css" href="./assets/style.css">
+</head>
+<body>
+    <section class = "quiz-container">
+        <header class = "header">
+            <h2>View high scores</h2>
+            <h2>Time: </h2>
+        </header>
+        <div class = "starting-page">
+            <h1>Javascript Coding Quiz</h1>
+            <p>Press the button below and begin a timed quiz on Javascript to test your knowledge.</p>
+            <button>Start Quiz</button>
+        </div>
+        <div class = "question-page"> 
+            <h2 class = "question">Question</h2>
+            <div class = "answers">
+                <button id="answer1">Answer 1</button>
+                <button id="answer2">Answer 2</button>
+                <button id="answer3">Answer 3</button>
+                <button id="answer4">Answer 4</button>
+            </div>
+        </div>
+        <form>
+            <div class = "ending-page">
+                <h2>All done!</h2>
+                <p>Your final score is: </p>
+                <label for="initials">Enter initials: </label>
+                <input type="text" class="form-input" name="initials" placeholder="Enter your initials"/>
+                <button>Submit</button>
+            </div>
+        </form>
+        <div class ="high-score-page">
+            <h2>High Scores</h2>
+            <ul>
+                <li>Score 1</li>
+            </ul>
+            <button>Take Quiz Again</button>
+            <button>Reset High Scores</button>
+        </div>
+    </section>
+
+    <script type="text/javascript" src="./assets/script.js"></script>
+</body>
+</html>
