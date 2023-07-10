@@ -1,3 +1,8 @@
+body {
+    font-family: "Roboto", sans-serif;
+    background-color: #eff5f8;
+    color: #001b44;
+}
 
 header {
  margin: 20px auto;
@@ -22,7 +27,7 @@ header .timer-text {
     margin: 60px auto;
     padding: 20px;
     width: 80vw;
-    height: 80vh;
+    height: 60vh;
     text-align: center;
 }
 
@@ -42,17 +47,6 @@ header .timer-text {
     font-size: large;
 }
 
-#view-scores {
-    margin: 10px auto;
-    width: 200px;
-    height: 35px;
-    text-align: center;
-    background-color: rgb(44, 132, 209);
-    border-radius: 10px;
-    font-size: large;
-    color: white;
-}
-
 .start-button {
     margin: 10px auto;
     width: 200px;
@@ -64,5 +58,58 @@ header .timer-text {
     color: white;
 }
 
+#submit {
+    margin: 10px auto;
+    width: 100px;
+    height: 35px;
+    text-align: center;
+    background-color: rgb(114, 126, 137);
+    border-radius: 10px;
+    color: white;
+}
+
+#ending-page {
+    font-size: large;
+}
+
+
+#view-scores {
+    margin: 10px auto;
+    width: 200px;
+    height: 35px;
+    text-align: center;
+    background-color: rgb(44, 132, 209);
+    border-radius: 10px;
+    font-size: large;
+    color: white;
+}
+
+#back-to-start {
+    margin: 10px auto;
+    width: 200px;
+    height: 35px;
+    text-align: center;
+    background-color: rgb(16, 76, 133);
+    border-radius: 10px;
+    font-size: large;
+    color: white;
+}
+
+#reset-scores {
+    margin: 10px auto;
+    width: 200px;
+    height: 35px;
+    text-align: center;
+    background-color: rgb(220, 44, 44);
+    border-radius: 10px;
+    font-size: large;
+    color: white;
+}
+
+
+
+
+/*submit button, take quiz button and reset high score button
+/*ul take out bullet points and put background color
 
 

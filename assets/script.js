@@ -20,6 +20,7 @@ var answer1 = document.getElementById("answer1");
 var answer2 = document.getElementById("answer2");
 var answer3 = document.getElementById("answer3");
 var answer4 = document.getElementById("answer4");
+var answerGrade = document.querySelector(".answer-grade");
 
 var i = 0;
 
@@ -56,68 +57,67 @@ var quizQuestions = [
         "answer4": "Javascript",  
     },
     {
-        "question": "Arrays in Javascript can be used to store: ", 
-        "answer1": "Arrays",
-        "answer2": "Booleans", 
-        "answer3": "Numbers and Strings", 
-        "answer4": "All of the above",   
+        "question": "The Assignment operator ____ assigns a value to a variable. ", 
+        "answer1": "-",
+        "answer2": ":", 
+        "answer3": ";", 
+        "answer4": "=",   
     },
     {
-        "question": "Arrays in Javascript can be used to store: ", 
-        "answer1": "Arrays",
-        "answer2": "Booleans", 
-        "answer3": "Numbers and Strings", 
-        "answer4": "All of the above",   
+        "question": "To execute the code inside of a function, it must be placed inside of:  ", 
+        "answer1": "{}",
+        "answer2": "[]", 
+        "answer3": "''", 
+        "answer4": "Any of the above",   
     },
     {
-        "question": "Arrays in Javascript can be used to store: ", 
-        "answer1": "Arrays",
-        "answer2": "Booleans", 
-        "answer3": "Numbers and Strings", 
-        "answer4": "All of the above",   
+        "question": "To find the length of a string 'text' use property: ", 
+        "answer1": ".size",
+        "answer2": ".arrayLength", 
+        "answer3": ".length", 
+        "answer4": ".properties",   
     },
     {
-        "question": "Arrays in Javascript can be used to store: ", 
-        "answer1": "Arrays",
-        "answer2": "Booleans", 
-        "answer3": "Numbers and Strings", 
-        "answer4": "All of the above",    
+        "question": "Math.random() returns a number between ___ and ___ .", 
+        "answer1": "0, 10",
+        "answer2": "0, 100", 
+        "answer3": "0, 1", 
+        "answer4": "-1, 1",    
     },
     {
-        "question": "Arrays in Javascript can be used to store: ", 
-        "answer1": "Arrays",
-        "answer2": "Booleans", 
-        "answer3": "Numbers and Strings", 
-        "answer4": "All of the above",   
+        "question": "JavaScript has 3 types of scope: ", 
+        "answer1": "Block, function and global scope",
+        "answer2": "Boolean, string and number scope", 
+        "answer3": "Variable, object and function scope", 
+        "answer4": "None of the above",   
     },
     {
-        "question": "Arrays in Javascript can be used to store: ", 
-        "answer1": "Arrays",
-        "answer2": "Booleans", 
-        "answer3": "Numbers and Strings", 
-        "answer4": "All of the above",    
+        "question": "JavaScript booleans represents ____ and _____", 
+        "answer1": "one, two",
+        "answer2": "on, off", 
+        "answer3": "true, false", 
+        "answer4": "stop, continue",    
     },
     {
-        "question": "Arrays in Javascript can be used to store: ", 
-        "answer1": "Arrays",
-        "answer2": "Booleans", 
-        "answer3": "Numbers and Strings", 
-        "answer4": "All of the above",   
+        "question": "In JavaScript, the 'this' keyword refers to a(n) ______", 
+        "answer1": "array",
+        "answer2": "variable", 
+        "answer3": "function", 
+        "answer4": "object",   
     }
-]
+]//holds quiz questions
 var quizKey = [ 
     "All of the above", 
     "while", 
     "console.log", 
-    "All of the above",
-    "All of the above", 
-    "All of the above", 
-    "All of the above", 
-    "All of the above", 
-    "All of the above", 
-    "All of the above",  
-]
-
+    "=",
+    "{}", 
+    ".length", 
+    "0, 1", 
+    "Block, function and global scope", 
+    "true, false", 
+    "object",  
+]//holds answer key
 
 function startGame() {
     startTimers();
@@ -130,7 +130,7 @@ function startGame() {
     endPage.hidden = true;
     highScorePage.hidden = true;
     renderQuestion();
-}
+}//start game starts questions and timer
 
 function endGame(score) {
     startPage.hidden = true;
@@ -139,9 +139,9 @@ function endGame(score) {
     highScorePage.hidden = true;
 
     finalScore.textContent = score;
-}
+}//end game prompts end page to enter initials
 
-function renderQuestion() {
+function renderQuestion(grade) {
     console.log(i);
     console.log(quizQuestions[i].question);
 
@@ -180,13 +180,11 @@ quizAnswerChoices.addEventListener("click", function(event) {
     } else {
         clearInterval(timer1);
         clearInterval(timer2);
-        endGame(timerScore);
-        highScore = timerScore;
+        highScore = timerScore * 5;
+        endGame(highScore);
         timerEL.textContent = "0";
-    }
-
-    
-});
+    }  
+});//renders next question after every click, reduces time if answer is wrong
 
 submitEl.addEventListener("click", function(event) {
     event.preventDefault();
@@ -208,12 +206,12 @@ submitEl.addEventListener("click", function(event) {
 
     saveScores();
     renderScores();
-});
+});//takes in initial input from end page
 
 function saveScores() {
     localStorage.setItem("savedInitials", JSON.stringify(savedInitials));
     localStorage.setItem("savedScores", JSON.stringify(savedScores));
-}
+}//saves scores and initials to local storage
 
 function renderScores() {
     startPage.hidden = true;
@@ -226,14 +224,14 @@ function renderScores() {
     for (var i = 0; i < savedInitials.length; i++) {
         var initials = savedInitials[i].toUpperCase();
         var scores = savedScores[i];
-    
         var li = document.createElement("li");
         li.textContent = initials + "  -  " + scores;
         li.setAttribute("data-index", i);
-  
+        li.setAttribute("style", "background: grey; color: white; padding: 10px; margin: 10px auto; width: 200px; list-style: none " )
+
         highScoreList.appendChild(li);
     }
-}
+}//renders scores and lists them on high score page
 
 function startTimers() {
     // Sets timer
@@ -255,7 +253,7 @@ function startTimers() {
     timer2 = setInterval(function() {
         timerScore++;
     }, 1000)
-}
+}//first timer is for user, second timer is for score
 
 function init() {
     startPage.hidden = false;
@@ -271,7 +269,7 @@ function init() {
       savedInitials = storedInitials;
       savedScores = storedScores;
     }
-}
+}//intial function used for take quiz button and gets scores and initials from local storage
 
 function clearStorage() {
     localStorage.clear();

@@ -14,7 +14,7 @@
     <section class = "quiz-container">
         <div id= "starting-page">
             <h1>Javascript Coding Quiz</h1>
-            <p>Press the button below and begin a timed quiz on Javascript to test your knowledge.</p>
+            <p>Press the button below and begin a timed quiz on Javascript to test your knowledge. For every wrong question there is a 10 second deduction on your timer, good luck!</p>
             <button class = "start-button">Start Quiz</button>
         </div>
         <div id= "question-page"> 
@@ -25,11 +25,12 @@
                 <li><button class = "answer-choice" id="answer3">Answer 3</button></li>
                 <li><button class = "answer-choice" id="answer4">Answer 4</button></li>
             </ul>
+            <h1 class = "answer-grade"></h1>
         </div>
         <div id = "ending-page">
                 <h2>All done!</h2>
                 <p class = "final-score-text">Your final score is: <span class = "final-score">0</span></p>
-                <label for="initials">Enter initials: </label>
+                <h3 for="initials">Enter initials: </h3>
                 <input type="text" class="form-input" name="initials" placeholder="Enter your initials"/>
                 <button id = "submit">Submit</button>
         </div>
