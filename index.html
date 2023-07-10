@@ -7,11 +7,11 @@
     <link rel="stylesheet" type="text/css" href="./assets/style.css">
 </head>
 <body>
+    <header class = "header">
+        <h2><button id = "view-scores">View high scores</button></h2>
+        <h2 class = "timer-text">Time: <span class = "timer-count" >75</span> seconds</h2>
+    </header>
     <section class = "quiz-container">
-        <header class = "header">
-            <h2>View high scores</h2>
-            <h2 class = "timer-text">Time: <span class = "timer-count" >75</span> seconds</h2>
-        </header>
         <div id= "starting-page">
             <h1>Javascript Coding Quiz</h1>
             <p>Press the button below and begin a timed quiz on Javascript to test your knowledge.</p>
@@ -35,11 +35,9 @@
         </div>
         <div id ="high-score-page">
             <h2>High Scores</h2>
-            <ul>
-                <li>Score 1</li>
-            </ul>
-            <button>Take Quiz</button>
-            <button>Reset High Scores</button>
+            <ul class="score-list"></ul>
+            <button id = "back-to-start">Take Quiz</button>
+            <button id = "reset-scores">Reset High Scores</button>
         </div>
     </section>
 

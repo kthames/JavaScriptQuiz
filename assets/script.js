@@ -1,9 +1,13 @@
 var timerEL = document.querySelector(".timer-count");
 var startButton = document.querySelector(".start-button");
 var submitEl = document.querySelector("#submit");
+var takeQuiz = document.querySelector("#back-to-start");
+var resetScores = document.querySelector("#reset-scores");
+var highScoreButton = document.querySelector("#view-scores");
 
 var finalScore = document.querySelector(".final-score");
 var initials = document.querySelector(".form-input");
+var highScoreList = document.querySelector(".score-list");
 
 var startPage = document.getElementById("starting-page");
 var questionPage = document.getElementById("question-page");
@@ -18,6 +22,11 @@ var answer3 = document.getElementById("answer3");
 var answer4 = document.getElementById("answer4");
 
 var i = 0;
+
+var highScore = 0;
+
+var savedInitials = [];
+var savedScores = [];
 
 var timer1;
 var timer2;
@@ -109,12 +118,12 @@ var quizKey = [
     "All of the above",  
 ]
 
-//save initials and score to local storage from event listener function
-//render highscore page
 
 function startGame() {
     startTimers();
     timerCount = 75;
+
+    i = 0;
 
     startPage.hidden = true;
     questionPage.hidden = false;
@@ -123,13 +132,13 @@ function startGame() {
     renderQuestion();
 }
 
-function endGame(highScore) {
+function endGame(score) {
     startPage.hidden = true;
     questionPage.hidden = true;
     endPage.hidden = false;
     highScorePage.hidden = true;
 
-    finalScore.textContent = highScore;
+    finalScore.textContent = score;
 }
 
 function renderQuestion() {
@@ -145,6 +154,7 @@ function renderQuestion() {
 }
 
 quizAnswerChoices.addEventListener("click", function(event) {
+    event.preventDefault();
     var element = event.target;
     console.log(i); 
 
@@ -171,11 +181,59 @@ quizAnswerChoices.addEventListener("click", function(event) {
         clearInterval(timer1);
         clearInterval(timer2);
         endGame(timerScore);
+        highScore = timerScore;
         timerEL.textContent = "0";
     }
 
     
 });
+
+submitEl.addEventListener("click", function(event) {
+    event.preventDefault();
+  
+    // Return from function early if submitted todoText is blank
+    if (initials === "") {
+      return;
+    }
+
+    initialInput = initials.value.trim();
+  
+    // Add new todoText to todos array, clear the input
+    savedInitials.push(initialInput);
+    savedScores.push(highScore);
+    console.log(savedInitials);
+    console.log(savedScores);
+
+    initials.value = "";
+
+    saveScores();
+    renderScores();
+});
+
+function saveScores() {
+    localStorage.setItem("savedInitials", JSON.stringify(savedInitials));
+    localStorage.setItem("savedScores", JSON.stringify(savedScores));
+}
+
+function renderScores() {
+    startPage.hidden = true;
+    questionPage.hidden = true;
+    endPage.hidden = true;
+    highScorePage.hidden = false;
+
+    highScoreList.innerHTML = " ";
+
+    for (var i = 0; i < savedInitials.length; i++) {
+        var initials = savedInitials[i].toUpperCase();
+        var scores = savedScores[i];
+    
+        var li = document.createElement("li");
+        li.textContent = initials + "  -  " + scores;
+        li.setAttribute("data-index", i);
+  
+        highScoreList.appendChild(li);
+    }
+}
 
 function startTimers() {
     // Sets timer
@@ -199,21 +257,34 @@ function startTimers() {
     }, 1000)
 }
 
-function saveScore() {
-    console.log("score saved");
-
-}
-
 function init() {
     startPage.hidden = false;
     questionPage.hidden = true;
     endPage.hidden = true;
     highScorePage.hidden = true;
+
+    var storedInitials = JSON.parse(localStorage.getItem("savedInitials"));
+    var storedScores = JSON.parse(localStorage.getItem("savedScores"));
+
+    // If scores & initials were retrieved from localStorage, update the array to it
+    if ((storedInitials !== null) && (storedScores !== null)) {
+      savedInitials = storedInitials;
+      savedScores = storedScores;
+    }
 }
 
+function clearStorage() {
+    localStorage.clear();
+    savedInitials = "";
+    savedScores = "";
+    renderScores();
+}
 
 startButton.addEventListener("click", startGame);
-submitEl.addEventListener("click", saveScore);
+resetScores.addEventListener("click", clearStorage);
+takeQuiz.addEventListener("click", init);
+highScoreButton.addEventListener("click", renderScores);
+
 
 // Calls init() so that it fires when page opened
 init();
